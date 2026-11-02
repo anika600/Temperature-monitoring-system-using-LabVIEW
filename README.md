@@ -40,37 +40,6 @@ A PC-based data-acquisition and alarm system. An **LM35** sensor measures temper
 5. Every alarm state change (and program start) is stamped with date and time, shown in the Event Log, and appended to a CSV file.
 
 ---
-
-## Hardware
-
-### Bill of materials
-
-| Qty | Part | Notes |
-|---|---|---|
-| 1 | Arduino Uno (or compatible) + USB cable | |
-| 1 | LM35 temperature sensor, **TO-92** package | Output 10 mV/°C |
-| 1 | Active buzzer, 5 V | "Active" = has its own oscillator and sounds on plain DC |
-| 1 | LED (any colour) | |
-| 1 | 220 Ω resistor | LED current limiting |
-| 1 | Breadboard + jumper wires | |
-
-### Wiring
-
-**LM35 (TO-92): hold with the flat face toward you, pins pointing down. Left to right:**
-
-| LM35 pin | Connects to |
-|---|---|
-| +Vs (left) | Arduino **5V** |
-| Vout (middle) | Arduino **A0** |
-| GND (right) | Arduino **GND** |
-
-| Component | Connection |
-|---|---|
-| Buzzer long leg (+) | Arduino **D8** |
-| Buzzer short leg (−) | GND |
-| LED anode (long leg) | Arduino **D7** through the **220 Ω** resistor |
-| LED cathode (short leg) | GND |
-
 ```
             Arduino Uno
          ┌───────────────┐
