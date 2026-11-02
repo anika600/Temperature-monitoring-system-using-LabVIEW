@@ -159,7 +159,7 @@ Columns: `date, time, event, averaged temperature (°C), high limit (°C)`.
 
 ---
 
-## Relevance and real-world use cases
+## Relevance 
 
 Temperature monitoring with threshold alarms and event logs is one of the most common tasks in instrumentation and control. This project is a small-scale version of the same architecture used in industry: **sensor → signal conditioning → acquisition → processing → HMI/alarm → data historian**.
 
@@ -181,7 +181,7 @@ Temperature monitoring with threshold alarms and event logs is one of the most c
 | **3D printing / battery packs** | Detect overheating of heaters or cells |
 | **Education** | Teaching DAQ, signal conditioning, HMI design and troubleshooting |
 
-### Concepts this project demonstrates
+### Concepts demonstrated
 Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design, HMI design, serial protocol design, state-change detection, file I/O, error handling, and hardware debugging.
 
 ---
