@@ -218,22 +218,6 @@ Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design,
 
 ---
 
-## Troubleshooting
-
-| Symptom | Likely cause and fix |
-|---|---|
-| COM Port drop-down empty | Charge-only USB cable, or port already open in another program |
-| Timeout error after about 10 s | Wrong port, Serial Monitor still open, or the sketch isn't running |
-| Error 1 at Scan From String | No or partial data. Check baud (9600 on both sides). One error at start-up can be ignored |
-| Readings wander or drift | A0 not connected to the sensor (floating pin) |
-| Reading ~1023, sensor hot | LM35 wired backwards. **Unplug immediately**, re-check the flat face |
-| Reading stuck high and unresponsive | Sensor damaged by reverse power. Replace it |
-| LED works, buzzer silent | Check that the buzzer is *active*, its polarity, and the D8/GND connections. A passive buzzer needs `tone()` in the firmware |
-| No CSV file | Folder in `Log File Path` doesn't exist, or the path has a typo |
-| Alarm never triggers | Limit too high or N too large |
-
----
-
 ## Known limitations
 
 - **Not closed-loop control in the strict sense.** The system monitors, alarms and signals back to a physical indicator, but it does not regulate the temperature (no heater or fan control).
