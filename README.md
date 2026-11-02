@@ -2,7 +2,7 @@
 
 A PC-based data-acquisition and alarm system. An **LM35** sensor measures temperature, an **Arduino Uno** digitises it and streams it over USB, and a **LabVIEW** program converts, filters, displays, alarms on, and logs the data. LabVIEW also sends a command back to the Arduino to switch a physical buzzer and LED.
 
-> **Author:** `<Your Name>` | **Tools:** LabVIEW 2026, NI-VISA, Arduino IDE | **Hardware:** Arduino Uno, LM35 (TO-92)
+> **Tools:** LabVIEW 2026, NI-VISA, Arduino IDE | **Hardware:** Arduino Uno, LM35 (TO-92)
 
 ---
 
