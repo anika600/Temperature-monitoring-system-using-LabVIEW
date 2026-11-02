@@ -133,7 +133,7 @@ Columns: `date, time, event, averaged temperature (°C), high limit (°C)`.
 
 ---
 
-## Key concepts explained
+## Key concepts
 
 **Analog sensing (LM35).** The LM35 is a precision, linear, analog temperature sensor. Its output voltage is 10 mV per °C (0.25 V at 25 °C), so the conversion needs no lookup table and no calibration curve. It measures its **own die temperature**, so what you read is the sensor's body temperature, not the air's.
 
@@ -186,7 +186,7 @@ Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design,
 
 ---
 
-## Known limitations
+## Limitations
 
 - **Not closed-loop control in the strict sense.** The system monitors, alarms and signals back to a physical indicator, but it does not regulate the temperature (no heater or fan control).
 - **No hysteresis.** If the temperature hovers at the limit, the alarm can toggle repeatedly.
