@@ -242,24 +242,6 @@ Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design,
 
 ---
 
-## Testing and results
-
-> Replace the placeholders with your own measurements.
-
-| Test | Expected | Observed |
-|---|---|---|
-| Room temperature raw count | ~45 to 70 | `<your value>` |
-| Converted temperature vs reference thermometer | within about ±1 °C | `<your value>` |
-| Pinch test: rise above limit | alarm triggers | `<result>` |
-| Release: alarm clears | `ALARM CLEARED` logged | `<result>` |
-| Averaging N = 1 vs 10 vs 30 | smoother and slower as N grows | `<screenshot>` |
-| Stop button | buzzer off, port released | `<result>` |
-| Re-run after stop | no "port busy" error | `<result>` |
-
-See `docs/trend_chart.png` for the raw trace against the smoothed averaged trace.
-
----
-
 ## Troubleshooting
 
 | Symptom | Likely cause and fix |
