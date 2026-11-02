@@ -97,27 +97,6 @@ A PC-based data-acquisition and alarm system. An **LM35** sensor measures temper
 
 ---
 
-## Repository structure
-
-```
-temperature-monitor/
-├── README.md
-├── arduino/
-│   └── temp_monitor/
-│       └── temp_monitor.ino        ← Arduino firmware
-├── labview/
-│   └── temperature control.vi      ← LabVIEW program
-├── docs/
-│   ├── block_diagram.png           ← full block diagram screenshot
-│   ├── front_panel.png             ← front panel while running
-│   ├── circuit_photo.jpg           ← photo of the breadboard build
-│   └── trend_chart.png             ← raw vs averaged trace
-└── data/
-    └── sample_alarm_log.csv        ← example log from a real run
-```
-
----
-
 ## Setup and usage
 
 ### 1. Build the circuit
