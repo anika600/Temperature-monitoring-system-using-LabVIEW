@@ -163,7 +163,6 @@ Columns: `date, time, event, averaged temperature (°C), high limit (°C)`.
 
 Temperature monitoring with threshold alarms and event logs is one of the most common tasks in instrumentation and control. This project is a small-scale version of the same architecture used in industry: **sensor → signal conditioning → acquisition → processing → HMI/alarm → data historian**.
 
-### Why it matters
 - **Safety:** overheating is a leading cause of equipment failure and fire. Early alarms prevent damage.
 - **Quality and compliance:** many processes (food, pharma, labs) must prove that temperatures stayed within limits. Timestamped logs provide that evidence.
 - **Predictive maintenance:** trends and event history show *when* a system started drifting, enabling root-cause analysis.
