@@ -2,25 +2,7 @@
 
 A PC-based data-acquisition and alarm system. An **LM35** sensor measures temperature, an **Arduino Uno** digitises it and streams it over USB, and a **LabVIEW** program converts, filters, displays, alarms on, and logs the data. LabVIEW also sends a command back to the Arduino to switch a physical buzzer and LED.
 
-> **Author:** `Anika Gupta` | **Tools:** LabVIEW 2026, NI-VISA, Arduino IDE | **Hardware:** Arduino Uno, LM35 (TO-92)
-
----
-
-## Table of contents
-1. [Features](#features)
-2. [How it works](#how-it-works)
-3. [Hardware](#hardware)
-4. [Software requirements](#software-requirements)
-5. [Repository structure](#repository-structure)
-6. [Setup and usage](#setup-and-usage)
-7. [LabVIEW program walkthrough](#labview-program-walkthrough)
-8. [Key concepts explained](#key-concepts-explained)
-9. [Relevance and real-world use cases](#relevance-and-real-world-use-cases)
-10. [Testing and results](#testing-and-results)
-11. [Troubleshooting](#troubleshooting)
-12. [Known limitations](#known-limitations)
-13. [Future improvements](#future-improvements)
-14. [License](#license)
+> **Author:** `<Your Name>` | **Tools:** LabVIEW 2026, NI-VISA, Arduino IDE | **Hardware:** Arduino Uno, LM35 (TO-92)
 
 ---
 
@@ -65,7 +47,7 @@ A PC-based data-acquisition and alarm system. An **LM35** sensor measures temper
 
 | Qty | Part | Notes |
 |---|---|---|
-| 1 | Arduino Uno (or compatible) + USB cable | Clones with a CH340 chip need the CH340 driver |
+| 1 | Arduino Uno (or compatible) + USB cable | |
 | 1 | LM35 temperature sensor, **TO-92** package | Output 10 mV/°C |
 | 1 | Active buzzer, 5 V | "Active" = has its own oscillator and sounds on plain DC |
 | 1 | LED (any colour) | |
@@ -110,7 +92,6 @@ A PC-based data-acquisition and alarm system. An **LM35** sensor measures temper
 | **LabVIEW** (developed in LabVIEW 2026) | The monitoring program (`.vi`) |
 | **NI-VISA** | Driver that lets LabVIEW talk to serial ports |
 | **Arduino IDE** | To upload the firmware |
-| *(Windows only, clones)* CH340 USB driver | Needed if no COM port appears |
 
 > The VI is saved in LabVIEW 2026. Older LabVIEW versions cannot open it directly. Use **File → Save for Previous Version** if you need to share it with an older install.
 
@@ -120,23 +101,19 @@ A PC-based data-acquisition and alarm system. An **LM35** sensor measures temper
 
 ```
 temperature-monitor/
-├── README.md                  ← this file
-├── REPORT.md                  ← detailed technical report
-├── LICENSE
-├── .gitignore
+├── README.md
 ├── arduino/
 │   └── temp_monitor/
-│       └── temp_monitor.ino   ← firmware
+│       └── temp_monitor.ino        ← Arduino firmware
 ├── labview/
-│   └── temperature control.vi ← LabVIEW program
+│   └── temperature control.vi      ← LabVIEW program
 ├── docs/
-│   ├── block_diagram.png      ← screenshot of the full block diagram
-│   ├── front_panel.png        ← screenshot of the front panel running
-│   ├── wiring_diagram.png     ← breadboard photo or Fritzing diagram
-│   ├── circuit_photo.jpg      ← photo of the real build
-│   └── trend_chart.png        ← screenshot showing raw vs averaged trace
+│   ├── block_diagram.png           ← full block diagram screenshot
+│   ├── front_panel.png             ← front panel while running
+│   ├── circuit_photo.jpg           ← photo of the breadboard build
+│   └── trend_chart.png             ← raw vs averaged trace
 └── data/
-    └── sample_alarm_log.csv   ← example log produced by a real run
+    └── sample_alarm_log.csv        ← example log from a real run
 ```
 
 ---
@@ -220,8 +197,6 @@ void loop() {
 | **9. Log** | Builds a timestamped CSV line, prepends it to the on-screen log, appends it to the file | Get Date/Time String, Select, Format Into String, Concatenate Strings, Open/Create/Replace File, Set File Position, Write to Text File, Close File |
 | **10. Shutdown** | Sends `0`, closes the port, reports errors | VISA Write, VISA Close, Simple Error Handler |
 
-See [`REPORT.md`](REPORT.md) for a block-by-block technical explanation.
-
 ### Log file format
 
 ```
@@ -290,7 +265,7 @@ Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design,
 
 ## Testing and results
 
-> Fill this section with your own measurements. Suggested table:
+> Replace the placeholders with your own measurements.
 
 | Test | Expected | Observed |
 |---|---|---|
@@ -302,7 +277,7 @@ Sensor interfacing, ADC resolution, unit scaling, noise filtering, alarm design,
 | Stop button | buzzer off, port released | `<result>` |
 | Re-run after stop | no "port busy" error | `<result>` |
 
-Add `docs/trend_chart.png` showing the jittery raw trace against the smooth averaged trace.
+See `docs/trend_chart.png` for the raw trace against the smoothed averaged trace.
 
 ---
 
@@ -310,7 +285,7 @@ Add `docs/trend_chart.png` showing the jittery raw trace against the smooth aver
 
 | Symptom | Likely cause and fix |
 |---|---|
-| COM Port drop-down empty | Missing CH340 driver, charge-only USB cable, or port already open elsewhere |
+| COM Port drop-down empty | Charge-only USB cable, or port already open in another program |
 | Timeout error after about 10 s | Wrong port, Serial Monitor still open, or the sketch isn't running |
 | Error 1 at Scan From String | No or partial data. Check baud (9600 on both sides). One error at start-up can be ignored |
 | Readings wander or drift | A0 not connected to the sensor (floating pin) |
@@ -329,7 +304,6 @@ Add `docs/trend_chart.png` showing the jittery raw trace against the smooth aver
 - **Start-up alarm edge case.** If the temperature is already above the limit on the first pass, the first log line reads `SYSTEM STARTED`, not `ALARM ON`.
 - **Resolution** is about 0.49 °C per count with the default 5 V reference.
 - **Accuracy** depends on the LM35's tolerance and the stability of the USB 5 V supply.
-- **Single-supply LM35 wiring** limits the range to roughly 2 to 100 °C or more depending on the variant, which suits this application.
 - **No CSV header row.**
 - The loop ends on the stop button only. A cable fault ends it after the VISA read timeout (10 s).
 
@@ -344,11 +318,5 @@ Add `docs/trend_chart.png` showing the jittery raw trace against the smooth aver
 - Add a **CSV header row** and log periodic temperature samples alongside events.
 - Add a **mute/acknowledge** button.
 - Add **heater/fan control** (relay or MOSFET) with a PID loop to make it a true closed-loop controller.
-- Add **Stop-on-error** by combining the VISA error status with the stop button.
+- Add **stop-on-error** by combining the VISA error status with the stop button.
 - Move to a wireless link (Bluetooth, Wi-Fi) or publish data via MQTT to a dashboard.
-
----
-
-## License
-
-Released under the MIT License. See `LICENSE`.
