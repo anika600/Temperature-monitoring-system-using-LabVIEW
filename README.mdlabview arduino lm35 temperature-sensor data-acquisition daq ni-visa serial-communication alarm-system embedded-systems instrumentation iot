@@ -1,1 +1,50 @@
+# Temperature Monitoring and Alarm System (LM35 + Arduino + LabVIEW)
 
+A PC-based data-acquisition and alarm system. An LM35 sensor measures temperature, an Arduino Uno digitises it and streams it over USB, and a LabVIEW program converts, filters, displays, alarms on, and logs the data. LabVIEW also sends a command back to the Arduino to switch a physical buzzer and LED.
+
+**Author:** `<Your Name>` | **Tools:** LabVIEW 2026, NI-VISA, Arduino IDE | **Hardware:** Arduino Uno, LM35 (TO-92)
+
+---
+
+## Table of contents
+1. [Features](#features)
+2. [How it works](#how-it-works)
+3. [Hardware](#hardware)
+4. [Software requirements](#software-requirements)
+5. [Repository structure](#repository-structure)
+6. [Setup and usage](#setup-and-usage)
+7. [LabVIEW program walkthrough](#labview-program-walkthrough)
+8. [Key concepts explained](#key-concepts-explained)
+9. [Relevance and real-world use cases](#relevance-and-real-world-use-cases)
+10. [Testing and results](#testing-and-results)
+11. [Troubleshooting](#troubleshooting)
+12. [Known limitations](#known-limitations)
+13. [Future improvements](#future-improvements)
+14. [License](#license)
+
+---
+
+## Features
+- Real-time acquisition of an analog LM35 signal through the Arduino's 10-bit ADC.
+- Unit conversion from raw ADC counts to volts to degrees Celsius ($10\text{ mV}/^\circ\text{C}$).
+- Moving-average filtering with a user-adjustable window (Averaging $N$) to reduce noise.
+- Live display on a thermometer indicator and a two-trace trend chart (raw vs averaged).
+- User-configurable high-limit alarm with:
+  - an on-screen LED,
+  - an audible PC beep,
+  - a physical buzzer and LED on the Arduino, driven by a command sent from LabVIEW.
+- Timestamped event log (on screen and appended to a CSV file) recording `SYSTEM STARTED`, `ALARM ON` and `ALARM CLEARED`, with the temperature and limit at the time of each event, for fault diagnosis and root-cause analysis.
+- Clean shutdown: buzzer switched off and serial port released when the program stops.
+
+---
+
+## How it works
+
+```text
+                  analog voltage                 USB serial, 9600 baud
+   LM35  ───────────────────────►  Arduino Uno  ─────────────────────────►  LabVIEW (PC)
+ (10 mV/°C)                         A0, 10-bit ADC     "68\r\n" per line      read, convert, filter,
+                                         ▲                                    compare, log
+                                         │       '1' = alarm ON, '0' = OFF       │
+                                         └───────────────────────────────────────┘
+                                         drives buzzer (D8) and LED (D7)
